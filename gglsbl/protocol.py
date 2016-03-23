@@ -297,7 +297,10 @@ class FullHashProtocolClient(BaseProtocolClient):
 class URL(object):
     "URL representation suitable for lookup"
     def __init__(self, url):
-        self.url = str(url)
+        if isinstance(url, unicode):
+            self.url = url.encode('utf-8')
+        else:
+            self.url = str(url)
 
     @property
     def hashes(self):
